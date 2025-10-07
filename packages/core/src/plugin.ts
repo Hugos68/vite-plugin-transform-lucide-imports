@@ -41,10 +41,10 @@ export const plugin = (options?: Options): Plugin => {
 			return {
 				code: coreTransform(code, {
 					warn: (warning: Warning) => {
-						if (!options?.onwarn) {
-							this.warn(warning.message);
-						} else {
+						if (options?.onwarn) {
 							options.onwarn(warning, (msg) => this.warn(msg));
+						} else {
+							this.warn(warning.message);				
 						}
 					},
 				}),
